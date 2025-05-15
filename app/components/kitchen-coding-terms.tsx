@@ -127,7 +127,8 @@ export default function KitchenCodingTerms() {
 
         <footer className="text-center py-4 text-sm text-slate-500 dark:text-slate-400">
           <div className="flex items-center justify-center gap-1">
-            <span>© HOPE</span>
+            <span><a href="https://github.com/hanshaoUi/programming-kitchen-terms">© HOPE</a></span>
+            
             <span className="text-orange-500">❤</span>
             <span>{new Date().getFullYear()}</span>
           </div>
