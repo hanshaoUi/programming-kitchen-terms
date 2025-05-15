@@ -69,37 +69,70 @@ export default function KitchenCodingTerms() {
   const [category, setCategory] = useState(Object.keys(TERMS)[0])
 
   return (
-    <div className="p-6 max-w-4xl mx-auto">
-      <h1 className="text-3xl font-bold mb-4">编程术语 · 做菜版解释 🍳</h1>
-      <Tabs value={category} onValueChange={setCategory} className="mb-4">
-        <TabsList className="flex overflow-x-auto">
-          {Object.keys(TERMS).map((key) => (
-            <TabsTrigger key={key} value={key} className="whitespace-nowrap">
-              {key}
-            </TabsTrigger>
-          ))}
-        </TabsList>
-        {Object.entries(TERMS).map(([key, items]) => (
-          <TabsContent key={key} value={key}>
-            <Accordion type="single" collapsible className="space-y-2">
-              {items.map(({ term, emoji, explain }) => (
-                <AccordionItem value={term} key={term}>
-                  <AccordionTrigger>
-                    <span className="flex items-center gap-2">
-                      <span className="text-xl">{emoji}</span> {term}
-                    </span>
-                  </AccordionTrigger>
-                  <AccordionContent>
-                    <Card>
-                      <CardContent className="p-4 text-sm text-muted-foreground">{explain}</CardContent>
-                    </Card>
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
-          </TabsContent>
-        ))}
-      </Tabs>
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
+      <div className="container mx-auto px-4 py-12 max-w-5xl">
+        <div className="text-center mb-10">
+          <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-orange-500 to-amber-500 text-transparent bg-clip-text">
+            编程术语 · 做菜版解释 🍳
+          </h1>
+          <p className="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
+            用厨房和烹饪的比喻来解释编程概念，让技术更易理解
+          </p>
+        </div>
+
+        <div className="bg-white dark:bg-slate-800 rounded-xl shadow-xl p-6 mb-8">
+          <Tabs value={category} onValueChange={setCategory} className="mb-4">
+            {/* Fixed tab navigation to prevent scrollbar */}
+            <div className="relative mb-6">
+              <TabsList className="flex w-full justify-between bg-slate-100 dark:bg-slate-700 rounded-lg p-1">
+                {Object.keys(TERMS).map((key) => (
+                  <TabsTrigger
+                    key={key}
+                    value={key}
+                    className="flex-1 whitespace-normal text-xs sm:text-sm px-2 py-2 rounded-md data-[state=active]:bg-white dark:data-[state=active]:bg-slate-600 data-[state=active]:shadow-sm transition-all"
+                  >
+                    {key}
+                  </TabsTrigger>
+                ))}
+              </TabsList>
+            </div>
+
+            {Object.entries(TERMS).map(([key, items]) => (
+              <TabsContent key={key} value={key} className="space-y-4">
+                <Accordion type="single" collapsible className="space-y-4">
+                  {items.map(({ term, emoji, explain }) => (
+                    <AccordionItem
+                      value={term}
+                      key={term}
+                      className="border border-slate-200 dark:border-slate-700 rounded-lg overflow-hidden"
+                    >
+                      <AccordionTrigger className="px-4 py-3 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
+                        <span className="flex items-center gap-3">
+                          <span className="text-2xl transition-transform hover:scale-110">{emoji}</span>
+                          <span className="font-medium">{term}</span>
+                        </span>
+                      </AccordionTrigger>
+                      <AccordionContent className="px-4 pb-4">
+                        <Card className="border-none shadow-none bg-slate-50 dark:bg-slate-700">
+                          <CardContent className="p-4 text-slate-700 dark:text-slate-300">{explain}</CardContent>
+                        </Card>
+                      </AccordionContent>
+                    </AccordionItem>
+                  ))}
+                </Accordion>
+              </TabsContent>
+            ))}
+          </Tabs>
+        </div>
+
+        <footer className="text-center py-4 text-sm text-slate-500 dark:text-slate-400">
+          <div className="flex items-center justify-center gap-1">
+            <span>© HOPE</span>
+            <span className="text-orange-500">❤</span>
+            <span>{new Date().getFullYear()}</span>
+          </div>
+        </footer>
+      </div>
     </div>
   )
 }
